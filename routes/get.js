@@ -5,10 +5,10 @@ router.get("/tvshows", (req, res) => {
   res.send(req.series);
 });
 
-router.get("/tvshow/:id", (req, res) => {
-  const id = Number(req.params.id);
+router.get("/tvshow/:tv_id", (req, res) => {
+  const tv_id = Number(req.params.tv_id);
 
-  if (Number.isNaN(id) || id < 1) {
+  if (Number.isNaN(tv_id) || tv_id < 1) {
     res.send({ status: 0, reason: "Invalid entry" });
     return;
   }
@@ -16,7 +16,7 @@ router.get("/tvshow/:id", (req, res) => {
   const _series = [...req.series];
 
   const tvshow = _series.find((char) => {
-    return char.id === id;
+    return char.tv_id === tv_id;
   });
 
   if (!tvshow) {
