@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const series = require("./tvshow.json");
+// const series = require("./tvshow.json");
 
 series.forEach((char, index) => {
   char.tv_id = index + 1;
