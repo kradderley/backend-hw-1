@@ -2,23 +2,21 @@ const express = require("express");
 const router = express.Router();
 
 router.post("/tvshow", (req, res) => {
-  const { adult, id, name, original_language, overview, media_type } = req.body;
+  const { adult, name, original_language, overview, media_type } = req.body;
 
   if (
     !adult ||
-    !id ||
     !name ||
     !original_language ||
     !overview ||
     !media_type ||
-    typeof adult !== "boolean" ||
-    typeof id !== "number" ||
+    typeof adult !== "string" ||
     typeof name !== "string" ||
     typeof original_language !== "string" ||
     typeof overview !== "string" ||
-    media_type === "tv"
+    typeof media_type !== "string"
   ) {
-    res.send({ status: 0, reason: "Not enough information added" });
+    res.send({ status: 0, reason: "Not enough/incorrect information added" });
     return;
   }
 
@@ -28,17 +26,20 @@ router.post("/tvshow", (req, res) => {
 
   if (indexOf > -1) {
     res.send({ status: 0, reason: "Tv show already added" });
+    return;
   }
 
-  //   complete this section
+  //   how to add tv_id based on previous object ???
   req.series.push({
     adult,
-    id: Math.round(Math.random() * 1000),
+    id: Math.round(Math.random() * 100000),
     name,
     original_language,
     overview,
     media_type,
   });
+
+  res.send({ status: 1, reason: "New movie added" });
 });
 
 module.exports = router;
