@@ -3,7 +3,6 @@ const router = express.Router();
 
 router.patch("/tvshow/:tv_id", (req, res) => {
   const tv_id = Number(req.params.tv_id);
-  const { adult, name, original_language, original_name, overview } = req.body;
   console.log(req.body, tv_id);
 
   if (Number.isNaN(tv_id)) {
@@ -19,6 +18,8 @@ router.patch("/tvshow/:tv_id", (req, res) => {
     res.send({ status: 0, reason: "Item does not exist" });
     return;
   }
+
+  const { adult, name, original_language, original_name, overview } = req.body;
 
   if (adult && typeof adult === "boolean") {
     req.series[indexOf].adult = adult;
