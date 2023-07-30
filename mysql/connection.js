@@ -18,8 +18,4 @@ function asyncMySQL(query) {
   });
 }
 
-// async function demo() {
-//     const result = await asyncMySQL();
-// }
-
 module.exports = asyncMySQL;
