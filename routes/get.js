@@ -1,11 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const asyncMySQL = require("../mysql/connection"); 
+const asyncMySQL = require("../mysql/connection");
 
+router.get("/tvshows", async (req, res) => {
+  const results =
+    await asyncMySQL(`SELECT name, adult, original_language, overview
+                          FROM tv_show`);
 
-// router.get("/tvshows", (req, res) => {
-//   res.send(req.series);
-// });
+  res.send({ results });
+});
 
 router.get("/tvshow/:tv_id", async (req, res) => {
   const tv_id = Number(req.params.tv_id);
@@ -20,7 +23,11 @@ router.get("/tvshow/:tv_id", async (req, res) => {
                                       FROM tv_show 
                                           WHERE id LIKE ${tv_id};`);
 
-    console.log(results)
+  if (results.length > 0) {
+    res.send({ results });
+    return;
+  }
+  res.send({ status: 0, reason: "Entry not found" });
 
   // const _series = [...req.series];
 

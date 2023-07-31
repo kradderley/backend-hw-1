@@ -4,16 +4,16 @@ const connection = mysql.createConnection({
   password: "",
   host: "localhost",
   port: 3306,
-  datatbase: "tvshow_database",
+  database: "tvshow_database",
 });
 
 function asyncMySQL(query) {
   return new Promise((resolve, reject) => {
-    connection.query(query, (error, result) => {
+    connection.query(query, (error, results) => {
       if (error) {
         reject(error);
       }
-      resolve(result);
+      resolve(results);
     });
   });
 }
