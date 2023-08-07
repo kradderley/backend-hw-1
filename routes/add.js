@@ -1,11 +1,12 @@
-// not working 
+// not working
 
 const express = require("express");
 const router = express.Router();
 const asyncMySQL = require("../mysql/connection");
+const { addTvShow } = require("../mysql/queries");
 
 router.post("/tvshow", async (req, res) => {
-  const { adult, name, original_language, overview } = req.body;
+  const { adult, name, original_language, overview, user_id } = req.body;
 
   // if (
   //   !adult ||
@@ -22,11 +23,9 @@ router.post("/tvshow", async (req, res) => {
   // }
 
   try {
-    await asyncMySQL(`INSERT INTO tv_show
-                        (name, adult, original_language, overview)
-                            VALUES 
-                              ("${name}", "${adult}", "${original_language}", "${overview}";`);
-
+    await asyncMySQL(
+      addTvShow(adult, name, original_language, overview, user_id)
+    );
     res.send({ status: 1 });
   } catch (error) {
     console.log(error);
