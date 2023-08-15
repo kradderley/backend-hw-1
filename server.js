@@ -15,11 +15,12 @@ app.use(express.static("public"));
 
 app.use(express.json());
 
-app.use("/get", require("./routes/get"));
-app.use("/delete", require("./routes/delete"));
-app.use("/add", require("./routes/add"));
-app.use("/update", require("./routes/update"));
+// app.use("/get", require("./routes/get"));
+// app.use("/delete", require("./routes/delete"));
+// app.use("/add", require("./routes/tvshow"));
+// app.use("/update", require("./routes/update"));
 app.use("/user", require("./routes/user"))
+app.use("/tvshow", require("./routes/tvshow"))
 
 const port = process.env.PORT || 6001;
 app.listen(port, () => {
